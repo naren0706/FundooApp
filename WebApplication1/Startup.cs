@@ -43,6 +43,8 @@ namespace WebApplication1
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<INotesManger, NotesManager>();
             services.AddScoped<INotesRepository, NotesRepository>();
+            services.AddScoped<ILabelsManager, LabelsManager>();
+            services.AddScoped<ILabelsRepository, LabelsRepository>();
 
             services.AddSwaggerGen(c =>
             {
