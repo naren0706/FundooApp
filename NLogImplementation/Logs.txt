@@ -1,0 +1,6 @@
+2023-10-26 12:46:51.0856|INFO|NlogImplementation.NlogOperation|Login successfully
+2023-10-26 12:56:52.6230|INFO|NlogImplementation.NlogOperation|Login successfully
+2023-10-26 13:03:17.9608|INFO|NlogImplementation.NlogOperation|Login successfully
+2023-10-26 13:10:04.4004|WARN|NlogImplementation.NlogOperation|Password Does not match!
+2023-10-26 13:10:12.9973|INFO|NlogImplementation.NlogOperation|Login successfully
+2023-10-26 13:10:32.7745|INFO|NlogImplementation.NlogOperation|Added Note successfully

@@ -1,8 +1,10 @@
 using FundooManager.IManager;
 using FundooManager.Manager;
+using FundooRepo.Repository;
 using FundooRepository.Context;
 using FundooRepository.IRepository;
 using FundooRepository.Repository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,10 +14,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace WebApplication1
@@ -37,11 +41,12 @@ namespace WebApplication1
             services.AddDbContextPool<UserDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("UserDbConnection")));
             services.AddScoped<IUserManager, UserManager>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<INotesManger, NotesManager>();
+            services.AddScoped<INotesRepository, NotesRepository>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Fundoo App", Version = "v1", Description = "Fundoo Applcation" });
-                services.AddScoped<IUserManager, UserManager>();
-                services.AddScoped<IUserRepository, UserRepository>();
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     In = ParameterLocation.Header,
@@ -61,12 +66,32 @@ namespace WebApplication1
                                  Type=ReferenceType.SecurityScheme,
                                  Id="Bearer"
                              }
-                         },new string[]{}
-                     }
+                         },
+                          new string[]{}
+                    }
+
                  });
+
+            });
+
+            services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = false,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Key"])) //Configuration["JwtToken:SecretKey"]
+                };
+
             });
         }
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -78,7 +103,7 @@ namespace WebApplication1
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
