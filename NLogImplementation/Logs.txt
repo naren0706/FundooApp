@@ -4,3 +4,66 @@
 2023-10-26 13:10:04.4004|WARN|NlogImplementation.NlogOperation|Password Does not match!
 2023-10-26 13:10:12.9973|INFO|NlogImplementation.NlogOperation|Login successfully
 2023-10-26 13:10:32.7745|INFO|NlogImplementation.NlogOperation|Added Note successfully
+2023-10-26 14:35:37.1113|INFO|NlogImplementation.NlogOperation|Added labels
+2023-10-26 14:36:15.2354|WARN|NlogImplementation.NlogOperation|Password Does not match!
+2023-10-26 14:37:21.0767|INFO|NlogImplementation.NlogOperation|Login successfully
+2023-10-26 14:40:14.9085|INFO|NlogImplementation.NlogOperation|Got all labels
+2023-10-26 14:42:17.1009|INFO|NlogImplementation.NlogOperation|Added labels
+2023-10-27 10:42:49.9431|INFO|NlogImplementation.NlogOperation|Notes Addeed Successfully
+2023-10-27 10:44:01.5699|INFO|NlogImplementation.NlogOperation|Registered successfully
+2023-10-27 10:44:36.7745|INFO|NlogImplementation.NlogOperation|Notes Addeed Successfully
+2023-10-27 10:50:24.5640|INFO|NlogImplementation.NlogOperation|Added labels
+2023-10-27 10:50:54.2181|INFO|NlogImplementation.NlogOperation|Added labels
+2023-10-30 09:27:05.2537|INFO|NlogImplementation.NlogOperation|Your Thrashed Note Are Dispalyed
+2023-11-02 10:20:51.1533|WARN|NlogImplementation.NlogOperation|Password Does not match!
+2023-11-02 10:21:01.8891|INFO|NlogImplementation.NlogOperation|Login successfully
+2023-11-02 10:31:32.4115|INFO|NlogImplementation.NlogOperation|Notes Addeed Successfully
+2023-11-03 10:20:33.2164|INFO|NlogImplementation.NlogOperation|Registered successfully
+2023-11-03 10:23:02.6822|INFO|NlogImplementation.NlogOperation|Login successfully
+2023-11-03 10:24:19.1942|INFO|NlogImplementation.NlogOperation|Notes Addeed Successfully
+2023-11-03 10:24:33.6904|INFO|NlogImplementation.NlogOperation|Notes Addeed Successfully
+2023-11-03 10:25:08.9474|INFO|NlogImplementation.NlogOperation|Notes Addeed Successfully
+2023-11-03 10:26:27.7129|INFO|NlogImplementation.NlogOperation|Added labels
+2023-11-03 10:27:42.0551|INFO|NlogImplementation.NlogOperation|Collobrator Added Successfully
+2023-11-09 10:23:50.8582|WARN|NlogImplementation.NlogOperation|User with the specified email not found
+2023-11-09 10:24:03.9414|INFO|NlogImplementation.NlogOperation|Login successfully
+2023-11-09 11:13:39.2283|INFO|NlogImplementation.NlogOperation|Login successfully
+2023-11-09 11:13:39.2283|INFO|NlogImplementation.NlogOperation|Login successfully
+2023-11-09 11:13:39.6454|INFO|NlogImplementation.NlogOperation|Login successfully
+2023-11-09 11:13:39.7601|INFO|NlogImplementation.NlogOperation|Login successfully
+2023-11-09 11:13:40.0204|INFO|NlogImplementation.NlogOperation|Login successfully
+2023-11-09 11:14:07.6880|INFO|NlogImplementation.NlogOperation|Login successfully
+2023-11-10 09:55:30.5117|WARN|NlogImplementation.NlogOperation|Password Does not match!
+2023-11-10 09:55:30.5117|INFO|NlogImplementation.NlogOperation|Login successfully
+2023-11-10 09:55:40.5446|INFO|NlogImplementation.NlogOperation|Login successfully
+2023-11-10 10:05:52.3885|INFO|NlogImplementation.NlogOperation|Login successfully
+2023-11-10 10:30:57.6793|INFO|NlogImplementation.NlogOperation|Login successfully
+2023-11-10 10:41:42.3273|INFO|NlogImplementation.NlogOperation|Login successfully
+2023-11-14 09:29:21.8465|INFO|NlogImplementation.NlogOperation|Registered successfully
+2023-11-14 09:30:51.4449|INFO|NlogImplementation.NlogOperation|Login successfully
+2023-11-15 09:22:21.2432|WARN|NlogImplementation.NlogOperation|Password Does not match!
+2023-11-15 09:22:27.8639|WARN|NlogImplementation.NlogOperation|Password Does not match!
+2023-11-15 09:23:13.7623|INFO|NlogImplementation.NlogOperation|Login successfully
+2023-11-15 09:23:24.2699|WARN|NlogImplementation.NlogOperation|Password Does not match!
+2023-11-15 09:27:54.6332|INFO|NlogImplementation.NlogOperation|Login successfully
+2023-11-15 09:42:34.7495|INFO|NlogImplementation.NlogOperation|Login successfully
+2023-11-15 09:47:29.0371|INFO|NlogImplementation.NlogOperation|Login successfully
+2023-11-15 17:27:47.1024|INFO|NlogImplementation.NlogOperation|Password reset successfully
+2023-11-15 17:35:40.2262|INFO|NlogImplementation.NlogOperation|Password reset successfully
+2023-11-15 17:35:46.0627|INFO|NlogImplementation.NlogOperation|Password reset successfully
+2023-11-15 17:35:57.6357|INFO|NlogImplementation.NlogOperation|Password reset successfully
+2023-11-15 17:38:34.1267|INFO|NlogImplementation.NlogOperation|Password reset successfully
+2023-11-15 17:38:39.0141|INFO|NlogImplementation.NlogOperation|Password reset successfully
+2023-11-15 17:39:34.7766|WARN|NlogImplementation.NlogOperation|Password Does not match!
+2023-11-15 17:39:42.6373|INFO|NlogImplementation.NlogOperation|Login successfully
+2023-11-15 17:43:02.4435|INFO|NlogImplementation.NlogOperation|Password reset successfully
+2023-11-15 17:52:37.2807|INFO|NlogImplementation.NlogOperation|Registered successfully
+2023-11-15 17:54:00.8765|INFO|NlogImplementation.NlogOperation|Login successfully
+2023-11-15 18:03:26.1870|INFO|NlogImplementation.NlogOperation|Registered successfully
+2023-11-16 09:58:55.3174|INFO|NlogImplementation.NlogOperation|Registered successfully
+2023-11-16 10:00:39.7553|INFO|NlogImplementation.NlogOperation|Registered successfully
+2023-11-16 10:00:43.6385|INFO|NlogImplementation.NlogOperation|Registered successfully
+2023-11-16 10:04:27.7173|INFO|NlogImplementation.NlogOperation|Login successfully
+2023-11-16 10:10:58.7663|INFO|NlogImplementation.NlogOperation|Password reset successfully
+2023-11-16 16:12:10.1154|INFO|NlogImplementation.NlogOperation|Registered successfully
+2023-11-16 17:35:39.1905|INFO|NlogImplementation.NlogOperation|Password reset successfully

@@ -169,6 +169,83 @@ namespace FundooRepository.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Notes",
+                columns: table => new
+                {
+                    NoteId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    Image = table.Column<string>(nullable: true),
+                    Color = table.Column<string>(nullable: true),
+                    Remainder = table.Column<string>(nullable: true),
+                    IsArchive = table.Column<bool>(nullable: false),
+                    IsPin = table.Column<bool>(nullable: false),
+                    IsTrash = table.Column<bool>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: true),
+                    Id = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notes", x => x.NoteId);
+                    table.ForeignKey(
+                        name: "FK_Notes_Register_Id",
+                        column: x => x.Id,
+                        principalTable: "Register",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Collaborator",
+                columns: table => new
+                {
+                    CollabId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NoteId = table.Column<int>(nullable: false),
+                    SenderUserId = table.Column<int>(nullable: false),
+                    ReceiverUserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Collaborator", x => x.CollabId);
+                    table.ForeignKey(
+                        name: "FK_Collaborator_Notes_NoteId",
+                        column: x => x.NoteId,
+                        principalTable: "Notes",
+                        principalColumn: "NoteId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Labels",
+                columns: table => new
+                {
+                    LabelId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LabelName = table.Column<string>(nullable: true),
+                    NoteId = table.Column<int>(nullable: true),
+                    Id = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Labels", x => x.LabelId);
+                    table.ForeignKey(
+                        name: "FK_Labels_Register_Id",
+                        column: x => x.Id,
+                        principalTable: "Register",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Labels_Notes_NoteId",
+                        column: x => x.NoteId,
+                        principalTable: "Notes",
+                        principalColumn: "NoteId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -207,6 +284,26 @@ namespace FundooRepository.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Collaborator_NoteId",
+                table: "Collaborator",
+                column: "NoteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Labels_Id",
+                table: "Labels",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Labels_NoteId",
+                table: "Labels",
+                column: "NoteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Notes_Id",
+                table: "Notes",
+                column: "Id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -227,13 +324,22 @@ namespace FundooRepository.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Register");
+                name: "Collaborator");
+
+            migrationBuilder.DropTable(
+                name: "Labels");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Notes");
+
+            migrationBuilder.DropTable(
+                name: "Register");
         }
     }
 }

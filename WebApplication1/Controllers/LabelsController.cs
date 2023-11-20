@@ -5,11 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System;
 using FundooModel.Labels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FundooApplication.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class LabelsController : ControllerBase
     {
         public readonly ILabelsManager labelsManager;
@@ -57,11 +59,11 @@ namespace FundooApplication.Controllers
 
         [HttpPut]
         [Route("Delete Label")]
-        public ActionResult DeleteLabels( string email)
+        public ActionResult DeleteLabels( int UserId)
         {
             try
             {
-                var result = this.labelsManager.DeleteLabels( email);
+                var result = this.labelsManager.DeleteLabels(UserId);
                 if (result != null)
                 {
                     return this.Ok(new { Status = true, Message = "Deleted label" });
@@ -75,11 +77,11 @@ namespace FundooApplication.Controllers
         }
         [HttpGet]
         [Route("Get All Label")]
-        public async Task<ActionResult> GetAllLabels(string email)
+        public async Task<ActionResult> GetAllLabels(int UserId)
         {
             try
             {
-                var result = this.labelsManager.GetAllLabels(email);
+                var result = this.labelsManager.GetAllLabels(UserId);
                 if (result != null)
                 {
                     return this.Ok(new { Status = true, Message = "labels displayed", data = result });

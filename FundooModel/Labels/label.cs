@@ -1,4 +1,5 @@
-﻿using FundooModel.User;
+﻿using FundooModel.Notes;
+using FundooModel.User;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,17 +12,13 @@ namespace FundooModel.Labels
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
-        [Required]
-        public string EmailId { get; set; }
-
-        [Required]
+        public int LabelId { get; set; }
         public string LabelName { get; set; }
-
-       /* public int id { get; set; }
-        * 
-        [ForeignKey("userid")]
-        public Register Register{ get; set; }*/
+        [ForeignKey("Note")]
+        public int? NoteId { get; set; }
+        public virtual Note Note { get; set; }
+        [ForeignKey("Register")]
+        public int Id { get; set; }
+        public virtual Register Register { get; set; }
     }
 }

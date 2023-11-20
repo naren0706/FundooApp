@@ -1,4 +1,5 @@
 ﻿using FundooModel.Notes;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,14 +10,17 @@ namespace FundooManager.IManager
     {
         public Task<int> AddNotes(Note note);
         public Note EditNotes(Note note);
-        public IEnumerable<Note> GetAllNotes(string email);
-        public bool DeleteNote(int noteid, string email);
-        public IEnumerable<Note> GetArcheived(string email);
-        public IEnumerable<Note> GetPinnedTask(string email);
-        public IEnumerable<Note> GetThrashedTask(string email);
-        public bool TrashNote(string email);
-        public Note ArcheiveNote(int noteId, string email);
-        public Note PinNote(int noteId, string email);
-        public bool RestoreNotes(int noteId, string email);
+        public IEnumerable<Note> GetAllNotes(int UserId);
+        public bool DeleteNote(int noteid, int UserId);
+        public IEnumerable<Note> GetArcheived(int UserId);
+        public IEnumerable<Note> GetPinnedTask(int UserId);
+        public IEnumerable<Note> GetThrashedTask(int UserId);
+        public bool TrashNote(int UserId);
+        public Note ArcheiveNote(int noteId, int UserId);
+        public Note PinNote(int noteId, int UserId);
+        public bool RestoreNotes(int noteId, int UserId);
+        public string Image(IFormFile file, int noteId);
+        public Note GetNoteById(int userId, int noteId);
+
     }
 }

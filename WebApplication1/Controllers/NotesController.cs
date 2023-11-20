@@ -59,11 +59,11 @@ namespace FundooApplication.Controllers
         }
         [HttpPut]
         [Route("Delete Notes")]
-        public ActionResult DeleteNote(int noteid, string email)
+        public ActionResult DeleteNote(int noteid, int UserId)
         {
             try
             {
-                var result = this.NoteManager.DeleteNote(noteid, email);
+                var result = this.NoteManager.DeleteNote(noteid, UserId);
                 if (result != null)
                 {
                     return this.Ok(new { Status = true, Message = "Moved to Trash" });
@@ -77,11 +77,29 @@ namespace FundooApplication.Controllers
         }
         [HttpGet]
         [Route("Get All Notes")]
-        public async Task<ActionResult> GetAllNotes(string email)
+        public async Task<ActionResult> GetAllNotes(int UserId)
         {
             try
             {
-                var result = this.NoteManager.GetAllNotes(email);
+                var result = this.NoteManager.GetAllNotes(UserId);
+                if (result != null)
+                {
+                    return this.Ok(new { Status = true, Message = "Notes Found", data = result });
+                }
+                return this.BadRequest(new { Status = false, Message = "No Notes Found" });
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new { Status = false, Message = ex.Message });
+            }
+        }
+        [HttpGet]
+        [Route("Get Notes by Id")]
+        public async Task<ActionResult> GetNoteById(int userId, int noteId)
+        {
+            try
+            {
+                var result = this.NoteManager.GetNoteById(userId, noteId);
                 if (result != null)
                 {
                     return this.Ok(new { Status = true, Message = "Notes Found", data = result });
@@ -95,16 +113,16 @@ namespace FundooApplication.Controllers
         }
         [HttpGet]
         [Route("Get All Archeived Notes")]
-        public async Task<ActionResult> GetArcheived(string email)
+        public async Task<ActionResult> GetArcheived(int UserId)
         {
             try
             {
-                var result = this.NoteManager.GetArcheived(email);
+                var result = this.NoteManager.GetArcheived(UserId);
                 if (result != null)
                 {
                     return this.Ok(new { Status = true, Message = "Added to archeived", data = result });
                 }
-                return this.BadRequest(new { Status = false, Message = "email data found empty" });
+                return this.BadRequest(new { Status = false, Message = "UserId data found empty" });
             }
             catch (Exception ex)
             {
@@ -113,16 +131,16 @@ namespace FundooApplication.Controllers
         }
         [HttpGet]
         [Route("Get All Pinned Notes")]
-        public async Task<ActionResult> GetPinnedTask(string email)
+        public async Task<ActionResult> GetPinnedTask(int UserId)
         {
             try
             {
-                var result = this.NoteManager.GetPinnedTask(email);
+                var result = this.NoteManager.GetPinnedTask(UserId);
                 if (result != null)
                 {
                     return this.Ok(new { Status = true, Message = "Note Pinned successfully", data = result });
                 }
-                return this.BadRequest(new { Status = false, Message = "Email not found" });
+                return this.BadRequest(new { Status = false, Message = "UserId not found" });
             }
             catch (Exception ex)
             {
@@ -131,11 +149,11 @@ namespace FundooApplication.Controllers
         }
         [HttpGet]
         [Route("Get All Thrashed Notes")]
-        public async Task<ActionResult> GetThrashedTask(string email)
+        public async Task<ActionResult> GetThrashedTask(int UserId)
         {
             try
             {
-                var result = this.NoteManager.GetThrashedTask(email);
+                var result = this.NoteManager.GetThrashedTask(UserId);
                 if (result != null)
                 {
                     return this.Ok(new { Status = true, Message = "Notes Found", data = result });
@@ -149,11 +167,11 @@ namespace FundooApplication.Controllers
         }
         [HttpDelete]
         [Route("Permanent Delete")]
-        public async Task<ActionResult> TrashNote(string email)
+        public async Task<ActionResult> TrashNote(int UserId)
         {
             try
             {
-                var result = this.NoteManager.TrashNote(email);
+                var result = this.NoteManager.TrashNote(UserId);
                 if (result != null)
                 {
                     return this.Ok(new { Status = true, Message = "Notes Found" });
@@ -167,11 +185,11 @@ namespace FundooApplication.Controllers
         }
         [HttpPut]
         [Route("Add to Notes Archeive")]
-        public ActionResult ArcheiveNote(int noteid, string email)
+        public ActionResult ArcheiveNote(int noteid, int UserId)
         {
             try
             {
-                var result = this.NoteManager.ArcheiveNote(noteid, email);
+                var result = this.NoteManager.ArcheiveNote(noteid, UserId);
                 if (result != null)
                 {
                     return this.Ok(new { Status = true, Message = "Note Archeived Successful", data = result });
@@ -185,11 +203,11 @@ namespace FundooApplication.Controllers
         }
         [HttpPut]
         [Route("Add to Pinned Notes ")]
-        public ActionResult PinNote(int noteid, string email)
+        public ActionResult PinNote(int noteid, int UserId)
         {
             try
             {
-                var result = this.NoteManager.PinNote(noteid, email);
+                var result = this.NoteManager.PinNote(noteid, UserId);
                 if (result != null)
                 {
                     return this.Ok(new { Status = true, Message = "Note Pinned Successful", data = result });
@@ -206,11 +224,29 @@ namespace FundooApplication.Controllers
 
         [HttpPut]
         [Route("Restore Notes")]
-        public ActionResult RestoreNotes(int noteid, string email)
+        public ActionResult RestoreNotes(int noteid, int UserId)
         {
             try
             {
-                var result = this.NoteManager.RestoreNotes(noteid, email);
+                var result = this.NoteManager.RestoreNotes(noteid, UserId);
+                if (result != null)
+                {
+                    return this.Ok(new { Status = true, Message = "Note resotored Successful", data = result });
+                }
+                return this.BadRequest(new { Status = false, Message = "Not found" });
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new { Status = false, Message = ex.Message });
+            }
+        }
+        [HttpPut]
+        [Route("Images")]
+        public ActionResult Image(IFormFile file, int NoteId)
+        {
+            try
+            {
+                var result = this.NoteManager.Image(file, NoteId);
                 if (result != null)
                 {
                     return this.Ok(new { Status = true, Message = "Note resotored Successful", data = result });

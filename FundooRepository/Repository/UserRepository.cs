@@ -68,17 +68,17 @@ namespace FundooRepository.Repository
             }
         }
 
-        public Register ResetPassword(ResetPassword reset)
+        public Register ResetPassword(string email,string newPassword,string confirmPassword)
         {
             try
             {
-                if (reset.NewPassword.Equals(reset.ConfirmPassword))
+                if (newPassword.Equals(confirmPassword))
                 {
-                    var input = this.context.Register.Where(x => x.Email.Equals(reset.Email)).FirstOrDefault();
+                    var input = this.context.Register.Where(x => x.Email.Equals(email)).FirstOrDefault();
                     if (input != null)
                     {
                         // Update the password and save changes
-                        var password = EncryptPassword(reset.NewPassword);
+                        var password = EncryptPassword(newPassword);
                         input.Password = password; // Assuming you store the encrypted password
                         this.context.Register.Update(input);
                         this.context.SaveChanges();
@@ -131,7 +131,7 @@ namespace FundooRepository.Repository
                 {
                     var token = GenerateSecurityToken(emailcheck.Email, emailcheck.Id);
                     MSMQ msmq = new MSMQ();
-                    msmq.sendData2Queue(token);
+                    msmq.sendData2Queue(token,Email);
                     return token;
                 }
                 else

@@ -19,9 +19,57 @@ namespace FundooRepository.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("FundooModel.Labels.label", b =>
+                {
+                    b.Property<int>("LabelId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LabelName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("NoteId")
+                        .HasColumnType("int");
+
+                    b.HasKey("LabelId");
+
+                    b.HasIndex("Id");
+
+                    b.HasIndex("NoteId");
+
+                    b.ToTable("Labels");
+                });
+
+            modelBuilder.Entity("FundooModel.Notes.Collaborator", b =>
+                {
+                    b.Property<int>("CollabId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("NoteId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReceiverUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SenderUserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CollabId");
+
+                    b.HasIndex("NoteId");
+
+                    b.ToTable("Collaborator");
+                });
+
             modelBuilder.Entity("FundooModel.Notes.Note", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("NoteId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -35,9 +83,8 @@ namespace FundooRepository.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EmailId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
@@ -61,7 +108,9 @@ namespace FundooRepository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("NoteId");
+
+                    b.HasIndex("Id");
 
                     b.ToTable("Notes");
                 });
@@ -292,6 +341,37 @@ namespace FundooRepository.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("FundooModel.Labels.label", b =>
+                {
+                    b.HasOne("FundooModel.User.Register", "Register")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FundooModel.Notes.Note", "Note")
+                        .WithMany()
+                        .HasForeignKey("NoteId");
+                });
+
+            modelBuilder.Entity("FundooModel.Notes.Collaborator", b =>
+                {
+                    b.HasOne("FundooModel.Notes.Note", "Note")
+                        .WithMany()
+                        .HasForeignKey("NoteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("FundooModel.Notes.Note", b =>
+                {
+                    b.HasOne("FundooModel.User.Register", "Register")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -10,7 +10,7 @@ namespace FundooRepository.IRepository
     {
         public Task<int> RegisterUser(Register register);
         public string LoginUser(Login login);
-        public Register ResetPassword(ResetPassword reset);
+        public Register ResetPassword(string email, string newPassword, string confirmPassword);
         public string ForgetPassword(string email);
     }
 }

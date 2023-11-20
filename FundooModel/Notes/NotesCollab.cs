@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
-using FundooModel.User;
 
 namespace FundooModel.Notes
 {
-    public class Note
+    public class NotesCollab
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int NoteId { get; set; }
-        [Required]
         public string Title { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
@@ -22,9 +17,11 @@ namespace FundooModel.Notes
         public bool IsPin { get; set; }
         public bool IsTrash { get; set; }
         public DateTime? CreatedDate { get; set; }
-        public DateTime? ModifiedDate { get; set; }        
-        public int Id { get; set; }
-        [ForeignKey("Id")]
-        public Register Register { get; set; }
+        public DateTime? ModifiedDate { get; set; }
+        public int CollabId { get; set; }
+        public int UserId { get; set; }
+        public int SenderUserId { get; set; }
+        public int ReceiverUserId { get; set; }
+
     }
 }

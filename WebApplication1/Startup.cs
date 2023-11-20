@@ -32,8 +32,6 @@ namespace WebApplication1
         }
 
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
@@ -45,6 +43,10 @@ namespace WebApplication1
             services.AddScoped<INotesRepository, NotesRepository>();
             services.AddScoped<ILabelsManager, LabelsManager>();
             services.AddScoped<ILabelsRepository, LabelsRepository>();
+            services.AddScoped<ICollaboratorManager, CollaboratorManager>();
+            services.AddScoped<ICollaboratorRepository, CollaboratorRepository>();
+
+            
 
             services.AddSwaggerGen(c =>
             {
@@ -93,7 +95,13 @@ namespace WebApplication1
                 };
 
             });
+            services.AddDistributedRedisCache(Options =>
+            {
+                Options.Configuration = "localhost:6379";
+                Options.InstanceName = "Fundoocache";
+            });
         }
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -101,6 +109,10 @@ namespace WebApplication1
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors(x => x
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
 
             app.UseHttpsRedirection();
 

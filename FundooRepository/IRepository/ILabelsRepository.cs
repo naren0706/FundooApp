@@ -10,7 +10,7 @@ namespace FundooRepository.IRepository
     {
         public Task<int> AddLabels(label labels);
         public label EditLabel(label labels);
-        public IEnumerable<label> GetAllLabels(string email);
-        public bool DeleteLabels(string email);
+        public IEnumerable<label> GetAllLabels(int UserId);
+        public bool DeleteLabels(int UserId);
     }
 }

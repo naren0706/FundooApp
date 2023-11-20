@@ -5,25 +5,19 @@ using System.Threading.Tasks;
 using System;
 using FundooModel.User;
 using FundooManager.IManager;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApplication1.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    
+    [ApiController]    
     public class UserController : ControllerBase
     {
         public readonly IUserManager userManager;
         public UserController(IUserManager userManager)
         {
             this.userManager = userManager;
-        }
-
-        [HttpGet]
-        [Route("check")]
-        public async Task<ActionResult> UserRegister(int i)
-        {
-            return Ok();
         }
         [HttpPost]
         [Route("Register")]
@@ -63,16 +57,18 @@ namespace WebApplication1.Controllers
             }
         }
 
+        [Authorize]
         [HttpPut]
         [Route("ResetPassword")]
-        public ActionResult UserResetPassword(ResetPassword resetPassword)
+        public ActionResult UserResetPassword(string newPassword,string confirmPassword)
         {
             try
             {
-                var result = this.userManager.ResetPassword(resetPassword);
+                var email = User.FindFirst(ClaimTypes.Email).Value.ToString();
+                var result = this.userManager.ResetPassword(email,newPassword,confirmPassword);
                 if (result != null)
                 {
-                    return this.Ok(new { Status = true, Message = "User password reset Successful", data = resetPassword });
+                    return this.Ok(new { Status = true, Message = "User password reset Successful", data = result });
                 }
                 return this.BadRequest(new { Status = false, Message = "User  password reset UnSuccessful" });
             }
